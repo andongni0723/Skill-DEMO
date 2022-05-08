@@ -12,18 +12,23 @@ public class ShootUI : MonoBehaviour
     private GameObject circle => transform.GetChild(0).gameObject;
     private GameObject shoot => transform.GetChild(1).gameObject;
 
-    bool isSetDone = false;
+    public bool isSetDone = false;
 
 
     private void Start()
     {
-        joystick = GameObject.FindGameObjectWithTag("Skill" + skillNum.ToString()).GetComponentInChildren<FloatingJoystick>();
+
     }
 
     private void Update()
     {
-        SetRadius(height, width);
-        Look();
+        if (isSetDone)
+        {
+            joystick = GameObject.FindGameObjectWithTag("Skill" + skillNum.ToString()).GetComponentInChildren<FloatingJoystick>();
+
+            SetRadius(height, width);
+            Look();
+        }
     }
 
     /// <summary>

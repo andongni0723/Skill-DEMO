@@ -1,4 +1,4 @@
 public enum SkillType
 {
-    Shoot, Point, AOE
+    Shoot, AOE, Point
 }

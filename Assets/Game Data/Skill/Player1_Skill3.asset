@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3acb1a31c3e40b74ba20e920df8293af, type: 3}
-  m_Name: Player1_Skill1
+  m_Name: Player1_Skill3
   m_EditorClassIdentifier: 
-  skillID: 1001
-  skillName: "\u9B54\u5F48"
-  skillSprite: {fileID: 21300000, guid: 1103e1180784ad14b8d402f94fc6bb70, type: 3}
-  skillCooldown: 3
-  skillNum: 1
-  skillType: 0
+  skillID: 1003
+  skillName: "\u5FC3\u9748\u76E4\u60D1"
+  skillSprite: {fileID: 21300000, guid: 75d1fe78a4b02694d9bef4cd5b62e4d4, type: 3}
+  skillCooldown: 5
+  skillNum: 3
+  skillType: 2
   shootVar:
-    shootHeight: 4
-    shootWidth: 0.8
+    shootHeight: 0
+    shootWidth: 0
   aoeVar:
-    aoeSkillMaxRadius: 0
-    aoeRadius: 0
+    aoeSkillMaxRadius: 5
+    aoeRadius: 1
   pointVar:
-    pointSkillMaxRadius: 0
+    pointSkillMaxRadius: 4
   OnSkill:
     m_PersistentCalls:
       m_Calls: []

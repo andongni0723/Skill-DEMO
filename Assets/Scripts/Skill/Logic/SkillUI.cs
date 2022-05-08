@@ -6,7 +6,7 @@ using TMPro;
 
 namespace SkillDemo.Skill
 {
-    public class SkillUI : MonoBehaviour
+    public class SkillUI : Singleton<SkillUI>
     {
         public Skill_SO skillDatail;
 
@@ -14,9 +14,26 @@ namespace SkillDemo.Skill
         private TextMeshProUGUI cooldownText;
         private TextMeshProUGUI skillName;
         private Joystick joystick;
+        public GameObject skillShow;
+
+
 
         private bool isCooldown;
         private float timer;
+
+        private bool isSkillSettingDone = false;
+        [SerializeField]
+        private int skillStatus = 0; // 0: Nothing , 1: Mouse button Down  , 2: Mouse button Up
+        private void OnEnable()
+        {
+            EventHandler.SetSkillDone += OnSetSkillDone;
+        }
+
+        private void OnDisable()
+        {
+            EventHandler.SetSkillDone -= OnSetSkillDone;
+        }
+
 
         private void Awake()
         {
@@ -31,17 +48,24 @@ namespace SkillDemo.Skill
 
         private void Update()
         {
-            if (Input.GetMouseButtonUp(0))
+            if (isSkillSettingDone)
             {
-                isCooldown = true;
-            }
+                ColdDown();
 
-            ColdDown();
+                skillStatus = ChangeSkillStatus(skillStatus);
+
+            }
+        }
+        private void OnSetSkillDone()
+        {
+            skillShow = GameObject.FindGameObjectWithTag("SkillUI").transform.GetChild(skillDatail.skillNum - 1).GetChild(0).gameObject;
+            isSkillSettingDone = true;
+
         }
 
-        public void ColdDown()
+        private void ColdDown()
         {
-            if (isCooldown)
+            if (skillStatus == 2)
             {
                 joystick.enabled = false;
                 cooldownText.gameObject.SetActive(true);
@@ -54,13 +78,31 @@ namespace SkillDemo.Skill
 
                 if (timer >= skillDatail.skillCooldown)
                 {
-                    isCooldown = false;
                     joystick.enabled = true;
                     timer = 0;
                     cooldownText.gameObject.SetActive(false);
                     skillImage.color = new Color(255, 255, 255, 255);
+
+                    skillStatus = 0;
                 }
             }
+        }
+
+        /// <summary>
+        /// If skill UI status change, return the status num
+        /// </summary>
+        /// <param name="_status">Input current status num</param>
+        /// <returns>status num (0: Nothing , 1: Mouse button Down  , 2: Mouse button Up )</returns>
+        public int ChangeSkillStatus(int _status)
+        {
+            if (skillShow.activeInHierarchy == true)
+                return 1;
+            else if ((skillShow.activeInHierarchy == false && _status == 1) || (_status == 2))
+                return 2;
+            else if (skillShow.activeInHierarchy == false && _status != 2)
+                return 0;
+            else
+                return 1;
         }
     }
 }

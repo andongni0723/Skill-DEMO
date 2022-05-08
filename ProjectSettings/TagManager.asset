@@ -8,6 +8,7 @@ TagManager:
   - Skill1
   - Skill2
   - Skill3
+  - SkillUI
   layers:
   - Default
   - TransparentFX

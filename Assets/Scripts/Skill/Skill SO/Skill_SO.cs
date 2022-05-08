@@ -13,12 +13,14 @@ public class Skill_SO : ScriptableObject
     public Sprite skillSprite;
 
     [Header("Game Details")]
-    public SkillType skillType;
     public float skillCooldown;
+    public int skillNum;
 
-    [Space(4f)]
-    public float width;
-    public float height;
+    [Header("Skill Type Setting")]  
+    public SkillType skillType;
+    public Shoot shootVar = new Shoot(); // Shoot UI
+    public AOE aoeVar = new AOE(); // AOE UI
+    public Point pointVar = new Point(); // Point UI
 
     public UnityEvent OnSkill;
 }
