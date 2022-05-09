@@ -9,6 +9,7 @@ TagManager:
   - Skill2
   - Skill3
   - SkillUI
+  - Enemy
   layers:
   - Default
   - TransparentFX

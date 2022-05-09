@@ -48,22 +48,21 @@ namespace SkillDemo.Skill
 
                     case SkillType.AOE:
                         GameObject aoe = (GameObject)Instantiate(PrefabManager.Instance.skillAOE, GameObject.FindGameObjectWithTag("Player").transform.position, Quaternion.identity, playerSkillUI.transform);
-                        //ShootUI aoeUI = aoe.GetComponent<ShootUI>();
+                        AOEUI aoeUI = aoe.GetComponent<AOEUI>();
 
-                        // shootUI.height = item.skillDatail.shootVar.shootHeight;
-                        // shootUI.width= item.skillDatail.shootVar.shootWidth;
-                        // shootUI.skillNum = skills.IndexOf(item) + 1;
-                        //AOEUI.isSetDone = true;
+                        aoeUI.skillMaxRadius = item.skillDatail.aoeVar.aoeSkillMaxRadius;
+                        aoeUI.aoeRadius = item.skillDatail.aoeVar.aoeRadius;
+                        aoeUI.skillNum = skills.IndexOf(item) + 1;
+                        aoeUI.isSetDone = true;
                         break;
 
                     case SkillType.Point:
                         GameObject point = (GameObject)Instantiate(PrefabManager.Instance.skillPoint, GameObject.FindGameObjectWithTag("Player").transform.position, Quaternion.identity, playerSkillUI.transform);
-                        //ShootUI pointUI = point.GetComponent<ShootUI>();
+                        PointUI pointUI = point.GetComponent<PointUI>();
 
-                        // shootUI.height = item.skillDatail.shootVar.shootHeight;
-                        // shootUI.width= item.skillDatail.shootVar.shootWidth;
-                        // shootUI.skillNum = skills.IndexOf(item) + 1;
-                        //AOEUI.isSetDone = true;                   
+                        pointUI.skillMaxRadius = item.skillDatail.pointVar.pointSkillMaxRadius; 
+                        pointUI.skillNum = skills.IndexOf(item) + 1;
+                        pointUI.isSetDone = true;             
                         break;
                 }
             }

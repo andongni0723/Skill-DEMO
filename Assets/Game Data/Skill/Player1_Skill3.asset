@@ -22,8 +22,8 @@ MonoBehaviour:
     shootHeight: 0
     shootWidth: 0
   aoeVar:
-    aoeSkillMaxRadius: 5
-    aoeRadius: 1
+    aoeSkillMaxRadius: 2
+    aoeRadius: 3
   pointVar:
     pointSkillMaxRadius: 4
   OnSkill:
