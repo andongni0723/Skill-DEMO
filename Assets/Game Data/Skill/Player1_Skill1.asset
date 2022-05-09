@@ -19,8 +19,8 @@ MonoBehaviour:
   skillNum: 1
   skillType: 0
   shootVar:
-    shootHeight: 4
-    shootWidth: 0.8
+    shootHeight: 6
+    shootWidth: 1.5
   aoeVar:
     aoeSkillMaxRadius: 0
     aoeRadius: 0

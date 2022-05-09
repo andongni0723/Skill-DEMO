@@ -5,7 +5,7 @@ using UnityEditor;
 public class SkillTypeEditor : Editor
 {
     private SerializedObject editor;//序列化
-    private SerializedProperty skillTypeEnum, shootClass, aoeClass, pointClass;
+    private SerializedProperty skillTypeEnum, shootClass, aoeClass, pointClass, actionType;
 
     private void OnEnable()
     {
@@ -15,14 +15,37 @@ public class SkillTypeEditor : Editor
         shootClass = editor.FindProperty("shootVar");
         aoeClass = editor.FindProperty("aoeVar");
         pointClass = editor.FindProperty("pointVar");
+        pointClass = editor.FindProperty("pointVar");
+        
+        Debug.Log(editor.FindProperty($"skillActions.Array.data[0].actionType").enumValueFlag);
     }
 
     public override void OnInspectorGUI()
     {
         editor.Update();
+        
+        InitVar(); 
+        
+        editor.ApplyModifiedProperties();
+    }
 
-        InitVar();
+    public void InitVar()
+    {
+        EditorGUILayout.PropertyField(editor.FindProperty("skillID"));
+        EditorGUILayout.PropertyField(editor.FindProperty("skillName"));
+        EditorGUILayout.PropertyField(editor.FindProperty("skillSprite"));
+        EditorGUILayout.PropertyField(editor.FindProperty("skillNum"));
+        EditorGUILayout.PropertyField(editor.FindProperty("skillCooldown"));
+        EditorGUILayout.PropertyField(skillTypeEnum);
+        SkillType();
 
+        EditorGUILayout.PropertyField(editor.FindProperty("skillActions"));
+        SkillActionEffectType();
+
+    }
+
+    public void SkillType()
+    {
         switch (skillTypeEnum.enumValueIndex)
         {
             case 0: // Shoot
@@ -35,17 +58,20 @@ public class SkillTypeEditor : Editor
                 EditorGUILayout.PropertyField(pointClass);
                 break;
         }
-
-        editor.ApplyModifiedProperties();
     }
 
-    public void InitVar()
+    public void SkillActionEffectType()
     {
-        EditorGUILayout.PropertyField(editor.FindProperty("skillID"));
-        EditorGUILayout.PropertyField(editor.FindProperty("skillName"));
-        EditorGUILayout.PropertyField(editor.FindProperty("skillSprite"));
-        EditorGUILayout.PropertyField(editor.FindProperty("skillNum"));
-        EditorGUILayout.PropertyField(editor.FindProperty("skillCooldown"));
-        EditorGUILayout.PropertyField(skillTypeEnum);
+        for (int actionListIndex = 0; actionListIndex < editor.FindProperty("skillActions.Array").arraySize; actionListIndex++)
+        {
+            actionType = editor.FindProperty($"skillActions.Array.data[{actionListIndex}].actionType");
+
+            // switch (actionType.enumNames == )
+            // {
+                
+            //     default:
+            // }
+        }
+
     }
 }

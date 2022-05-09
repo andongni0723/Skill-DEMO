@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -18,4 +19,16 @@ public class AOE
 public class Point
 {
     public float pointSkillMaxRadius;
+}
+
+[System.Serializable]
+public class SkillActionDetails
+{
+    public float startTime;
+
+    public ActionType actionType;
+    public List<Effect> skillEffect = new List<Effect>();
+
+    public GameObject skillVfxObj;
+    public float effectDuration;
 }

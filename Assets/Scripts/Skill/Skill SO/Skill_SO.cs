@@ -22,5 +22,6 @@ public class Skill_SO : ScriptableObject
     public AOE aoeVar = new AOE(); // AOE UI
     public Point pointVar = new Point(); // Point UI
 
-    public UnityEvent OnSkill;
+    [Space(10f)]
+    public List<SkillActionDetails> skillActions = new List<SkillActionDetails>();
 }

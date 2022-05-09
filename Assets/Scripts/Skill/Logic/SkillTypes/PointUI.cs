@@ -76,9 +76,8 @@ public class PointUI : MonoBehaviour
             {
                 // Get enemy distance
                 nowDistance = Vector2.Distance(pointJoystick.transform.position, enemy.transform.position);
-                print(nowDistance);
                 if (nowDistance < lastDistance) targetEnemy = enemy;
-                
+
                 //Init
                 lastDistance = nowDistance;
                 nowDistance = 0;
