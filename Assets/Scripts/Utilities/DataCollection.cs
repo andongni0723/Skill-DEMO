@@ -22,13 +22,22 @@ public class Point
 }
 
 [System.Serializable]
+public class EffectDatails
+{
+    public Effect effect;
+    public float effectDuration;
+}
+
+[System.Serializable]
 public class SkillActionDetails
 {
     public float startTime;
 
+    [Header("Skill Action Type")]
     public ActionType actionType;
-    public List<Effect> skillEffect = new List<Effect>();
 
-    public GameObject skillVfxObj;
-    public float effectDuration;
+
+    [Space(10)] public List<EffectDatails> skillEffect = new List<EffectDatails>();
+    [Space(10)] public GameObject skillVfxObj;
+
 }

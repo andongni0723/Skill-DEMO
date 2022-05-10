@@ -23,7 +23,17 @@ namespace SkillDemo.Skill
 
         private bool isSkillSettingDone = false;
         [SerializeField]
-        private int skillStatus = 0; // 0: Nothing , 1: Mouse button Down  , 2: Mouse button Up
+        private int skillStatus = 0; // (0: Nothing , 1: Mouse button Down  , 2: Excute skill  , 3: Mouse button Up )
+
+        private 
+
+        //Excute Skill Var
+        List<SkillActionDetails> skillActions;
+        int index = 0;
+        float excuteSkillTimer = 0;
+
+
+
         private void OnEnable()
         {
             EventHandler.SetSkillDone += OnSetSkillDone;
@@ -41,6 +51,7 @@ namespace SkillDemo.Skill
             skillName = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
             cooldownText = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
             joystick = GetComponentInChildren<FloatingJoystick>();
+            skillActions = skillDatail.skillActions;
 
             skillImage.sprite = skillDatail.skillSprite;
             skillName.text = skillDatail.skillName;
@@ -53,19 +64,22 @@ namespace SkillDemo.Skill
                 ColdDown();
 
                 skillStatus = ChangeSkillStatus(skillStatus);
+                //print(skillStatus);
 
             }
         }
         private void OnSetSkillDone()
         {
-            skillShow = GameObject.FindGameObjectWithTag("SkillUI").transform.GetChild(skillDatail.skillNum - 1).GetChild(0).gameObject;
+            skillShow = GameObject.FindGameObjectWithTag("SkillUI").transform.GetChild(skillDatail.skillNum - 1).GetChild(1).gameObject;
+
             isSkillSettingDone = true;
 
         }
 
+
         private void ColdDown()
         {
-            if (skillStatus == 2)
+            if (skillStatus == 3)
             {
                 joystick.enabled = false;
                 cooldownText.gameObject.SetActive(true);
@@ -92,17 +106,80 @@ namespace SkillDemo.Skill
         /// If skill UI status change, return the status num
         /// </summary>
         /// <param name="_status">Input current status num</param>
-        /// <returns>status num (0: Nothing , 1: Mouse button Down  , 2: Mouse button Up )</returns>
+        /// <returns>status num (0: Nothing , 1: Mouse button Down  , 2: Excute skill  , 3: Mouse button Up )</returns>
         public int ChangeSkillStatus(int _status)
         {
             if (skillShow.activeInHierarchy == true)
                 return 1;
-            else if ((skillShow.activeInHierarchy == false && _status == 1) || (_status == 2))
+            else if (skillShow.activeInHierarchy == false && _status == 1)
+            {
+                SetExcuteSkill();
                 return 2;
+            }
+            else if (_status == 3 || _status == 2)
+                return 3;
             else if (skillShow.activeInHierarchy == false && _status != 2)
                 return 0;
             else
                 return 1;
+
+            
+        }
+
+        private void SetExcuteSkill()
+        {
+            index = 0;
+            timer = 0;
+
+            print(index);
+            StartCoroutine(ExecuteSkill());
+        }
+
+        private IEnumerator ExecuteSkill()
+        {
+            print(index);
+            if(skillDatail.skillType == SkillType.Point)
+            {
+                PointUI pointUI = skillShow.GetComponent<PointUI>();
+
+                if(pointUI.targetEnemy == null)
+                {
+                    skillStatus = 0;
+                    yield return null;
+                } 
+            }
+
+            if (index < skillActions.Count)
+            {
+                print("skillCount");
+                if (timer == skillActions[index].startTime)
+                {
+                    switch (skillActions[index].actionType)
+                    {
+                        case ActionType.Effect:
+                            if (skillActions[index].skillEffect == null) break;
+
+                            print(skillActions[index].skillEffect);
+                            break;
+                        case ActionType.NewObject:
+                            if (skillActions[index].skillVfxObj == null) break;
+
+                            GameObject skillObj = Instantiate(skillActions[index].skillVfxObj, PlayerMove.Instance.transform.position, skillShow.transform.rotation);
+
+                            print(skillActions[index].skillVfxObj.name);
+                            break;
+                    }
+                }
+
+                index++;
+                excuteSkillTimer += 0.25f;
+                yield return new WaitForSeconds(0.25f);
+
+            }
+            else
+            {
+                yield return null;
+            }
         }
     }
 }

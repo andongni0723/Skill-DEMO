@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PointUI : MonoBehaviour
+public class PointUI : Singleton<PointUI>
 {
     public int skillNum;
     public float skillMaxRadius;
@@ -17,7 +17,7 @@ public class PointUI : MonoBehaviour
     private List<GameObject> enemys = new List<GameObject>();
 
     [SerializeField]
-    private GameObject targetEnemy;
+    public GameObject targetEnemy;
 
     private void Update()
     {
