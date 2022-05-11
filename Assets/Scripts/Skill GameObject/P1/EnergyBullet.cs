@@ -6,5 +6,6 @@ public class EnergyBullet : Bullet
 {   
     private void Update() {
         BulletMove();
+        OverSkillLenthDestroyObj();
     }
 }

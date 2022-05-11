@@ -144,8 +144,13 @@ namespace SkillDemo.Skill
             StartCoroutine(ExecuteSkill());
         }
 
+        /// <summary>
+        /// Excute Skill in SkillAction(SkillDetails_SO)
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator ExecuteSkill()
         {
+            // If the point skill doesn't have target enemy
             if (skillDatail.skillType == SkillType.Point)
             {
                 PointUI pointUI = skillShowChild.GetComponent<PointUI>();
@@ -157,10 +162,14 @@ namespace SkillDemo.Skill
                 }
             }
 
-            if (index < skillActions.Count)
+            // Excute Action in Skill Action 
+            for (int index = 0; index < skillActions.Count; index++) 
             {
-                if (timer == skillActions[index].startTime)
+                if (excuteSkillTimer == skillActions[index].startTime)
                 {
+                    print(excuteSkillTimer);
+                    //FIXME: can't shoot at second time
+
                     switch (skillActions[index].actionType)
                     {
                         case ActionType.Effect:
@@ -170,21 +179,28 @@ namespace SkillDemo.Skill
                         case ActionType.NewObject:
                             if (skillActions[index].skillVfxObj == null) break;
 
-                            GameObject skillObj = Instantiate(skillActions[index].skillVfxObj, PlayerMove.Instance.transform.position, skillShowUIRotation);
+                            switch (skillDatail.skillType)
+                            {
+                                case SkillType.Shoot:                                  
+                                    GameObject skillObj = Instantiate(skillActions[index].skillVfxObj, PlayerMove.Instance.transform.position, skillShowUIRotation);
+                                    
+                                    skillObj.GetComponentInChildren<SpriteRenderer>().size = new Vector2(skillDatail.shootVar.shootWidth, 1);
+                                    skillObj.GetComponentInChildren<Bullet>().skillLenth = skillDatail.shootVar.shootHeight;
+                                    break;
+
+                                case SkillType.AOE:
+                                    break;
+                            }
 
                             break;
                     }
                 }
 
-                index++;
                 excuteSkillTimer += 0.25f;
-                yield return new WaitForSeconds(0.25f);
+                //yield return new WaitForSeconds(0.25f);
+            }
 
-            }
-            else
-            {
-                yield return null;
-            }
+            yield return null;
         }
     }
 }
