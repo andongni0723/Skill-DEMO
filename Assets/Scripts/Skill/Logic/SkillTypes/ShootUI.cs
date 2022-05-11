@@ -47,8 +47,18 @@ public class ShootUI : MonoBehaviour
     /// </summary>
     private void Look()
     {
-        shoot.SetActive(joystick.transform.GetChild(0).gameObject.activeSelf);
-        circle.SetActive(joystick.transform.GetChild(0).gameObject.activeSelf);
+        if (joystick.transform.GetChild(0).gameObject.activeSelf == false && shoot.activeSelf)
+        {
+            EventHandler.CallSaveSkillShowUIData();
+            shoot.SetActive(false);
+            circle.SetActive(false);
+        }
+        else
+        {
+            shoot.SetActive(joystick.transform.GetChild(0).gameObject.activeSelf);
+            circle.SetActive(joystick.transform.GetChild(0).gameObject.activeSelf);
+        }
+
 
         float angle = Mathf.Atan2(joystick.Direction.y, joystick.Direction.x) * Mathf.Rad2Deg - 90;
         transform.rotation = Quaternion.Euler(0, 0, angle);

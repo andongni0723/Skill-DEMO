@@ -13,4 +13,10 @@ public static class EventHandler
     {
         SetInitSkillObjDone?.Invoke();
     }
+
+    public static event Action SaveSkillShowUIData;
+    public static void CallSaveSkillShowUIData()
+    {
+        SaveSkillShowUIData?.Invoke();
+    }
 }

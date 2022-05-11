@@ -10,6 +10,7 @@ TagManager:
   - Skill3
   - SkillUI
   - Enemy
+  - PlayerAttackObj
   layers:
   - Default
   - TransparentFX

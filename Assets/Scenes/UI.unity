@@ -224,8 +224,16 @@ PrefabInstance:
       value: Skill2
       objectReference: {fileID: 0}
     - target: {fileID: 280284517315508611, guid: b9ae357e3666b5b4bbfa66b64057adee, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 280284517315508611, guid: b9ae357e3666b5b4bbfa66b64057adee, type: 3}
       propertyPath: m_TagString
       value: Skill2
+      objectReference: {fileID: 0}
+    - target: {fileID: 280284517315508613, guid: b9ae357e3666b5b4bbfa66b64057adee, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 280284517315508613, guid: b9ae357e3666b5b4bbfa66b64057adee, type: 3}
       propertyPath: skillDatail
@@ -546,8 +554,16 @@ PrefabInstance:
       value: Skill3
       objectReference: {fileID: 0}
     - target: {fileID: 280284517315508611, guid: b9ae357e3666b5b4bbfa66b64057adee, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 280284517315508611, guid: b9ae357e3666b5b4bbfa66b64057adee, type: 3}
       propertyPath: m_TagString
       value: Skill3
+      objectReference: {fileID: 0}
+    - target: {fileID: 280284517315508613, guid: b9ae357e3666b5b4bbfa66b64057adee, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 280284517315508613, guid: b9ae357e3666b5b4bbfa66b64057adee, type: 3}
       propertyPath: skillDatail

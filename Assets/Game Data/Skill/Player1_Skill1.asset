@@ -15,7 +15,7 @@ MonoBehaviour:
   skillID: 1001
   skillName: "\u9B54\u5F48"
   skillSprite: {fileID: 21300000, guid: 1103e1180784ad14b8d402f94fc6bb70, type: 3}
-  skillCooldown: 3
+  skillCooldown: 1
   skillNum: 1
   skillType: 0
   shootVar:
@@ -26,6 +26,8 @@ MonoBehaviour:
     aoeRadius: 0
   pointVar:
     pointSkillMaxRadius: 0
-  OnSkill:
-    m_PersistentCalls:
-      m_Calls: []
+  skillActions:
+  - startTime: 0
+    actionType: 1
+    skillEffect: []
+    skillVfxObj: {fileID: 8145034337851827253, guid: f2dd7ea0e4cf8b940bd8471c8a6d1b31, type: 3}

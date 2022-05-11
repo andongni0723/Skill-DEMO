@@ -14,7 +14,8 @@ namespace SkillDemo.Skill
         private TextMeshProUGUI cooldownText;
         private TextMeshProUGUI skillName;
         private Joystick joystick;
-        public GameObject skillShow;
+        public GameObject skillShowChild;
+        public GameObject skillShowUI;
 
 
 
@@ -25,23 +26,27 @@ namespace SkillDemo.Skill
         [SerializeField]
         private int skillStatus = 0; // (0: Nothing , 1: Mouse button Down  , 2: Excute skill  , 3: Mouse button Up )
 
-        private 
+        private
 
         //Excute Skill Var
         List<SkillActionDetails> skillActions;
         int index = 0;
         float excuteSkillTimer = 0;
 
+        Quaternion skillShowUIRotation;
+
 
 
         private void OnEnable()
         {
             EventHandler.SetSkillDone += OnSetSkillDone;
+            EventHandler.SaveSkillShowUIData += OnSaveSkillShowUIData;
         }
 
         private void OnDisable()
         {
             EventHandler.SetSkillDone -= OnSetSkillDone;
+            EventHandler.SaveSkillShowUIData += OnSaveSkillShowUIData;
         }
 
 
@@ -70,12 +75,17 @@ namespace SkillDemo.Skill
         }
         private void OnSetSkillDone()
         {
-            skillShow = GameObject.FindGameObjectWithTag("SkillUI").transform.GetChild(skillDatail.skillNum - 1).GetChild(1).gameObject;
+            skillShowUI = GameObject.FindGameObjectWithTag("SkillUI").transform.GetChild(skillDatail.skillNum - 1).gameObject;
+            skillShowChild = skillShowUI.transform.GetChild(1).gameObject;
 
             isSkillSettingDone = true;
 
         }
 
+        private void OnSaveSkillShowUIData()
+        {
+            skillShowUIRotation = skillShowUI.transform.rotation;
+        }
 
         private void ColdDown()
         {
@@ -88,7 +98,7 @@ namespace SkillDemo.Skill
                 timer += Time.deltaTime;
 
                 skillImage.fillAmount = timer / skillDatail.skillCooldown;
-                cooldownText.text = (5 - timer).ToString("0");
+                cooldownText.text = (skillDatail.skillCooldown - timer).ToString("0");
 
                 if (timer >= skillDatail.skillCooldown)
                 {
@@ -109,21 +119,21 @@ namespace SkillDemo.Skill
         /// <returns>status num (0: Nothing , 1: Mouse button Down  , 2: Excute skill  , 3: Mouse button Up )</returns>
         public int ChangeSkillStatus(int _status)
         {
-            if (skillShow.activeInHierarchy == true)
+            if (skillShowChild.activeInHierarchy == true)
                 return 1;
-            else if (skillShow.activeInHierarchy == false && _status == 1)
+            else if (skillShowChild.activeInHierarchy == false && _status == 1)
             {
                 SetExcuteSkill();
                 return 2;
             }
             else if (_status == 3 || _status == 2)
                 return 3;
-            else if (skillShow.activeInHierarchy == false && _status != 2)
+            else if (skillShowChild.activeInHierarchy == false && _status != 2)
                 return 0;
             else
                 return 1;
 
-            
+
         }
 
         private void SetExcuteSkill()
@@ -131,27 +141,24 @@ namespace SkillDemo.Skill
             index = 0;
             timer = 0;
 
-            print(index);
             StartCoroutine(ExecuteSkill());
         }
 
         private IEnumerator ExecuteSkill()
         {
-            print(index);
-            if(skillDatail.skillType == SkillType.Point)
+            if (skillDatail.skillType == SkillType.Point)
             {
-                PointUI pointUI = skillShow.GetComponent<PointUI>();
+                PointUI pointUI = skillShowChild.GetComponent<PointUI>();
 
-                if(pointUI.targetEnemy == null)
+                if (pointUI.targetEnemy == null)
                 {
                     skillStatus = 0;
                     yield return null;
-                } 
+                }
             }
 
             if (index < skillActions.Count)
             {
-                print("skillCount");
                 if (timer == skillActions[index].startTime)
                 {
                     switch (skillActions[index].actionType)
@@ -159,14 +166,12 @@ namespace SkillDemo.Skill
                         case ActionType.Effect:
                             if (skillActions[index].skillEffect == null) break;
 
-                            print(skillActions[index].skillEffect);
                             break;
                         case ActionType.NewObject:
                             if (skillActions[index].skillVfxObj == null) break;
 
-                            GameObject skillObj = Instantiate(skillActions[index].skillVfxObj, PlayerMove.Instance.transform.position, skillShow.transform.rotation);
+                            GameObject skillObj = Instantiate(skillActions[index].skillVfxObj, PlayerMove.Instance.transform.position, skillShowUIRotation);
 
-                            print(skillActions[index].skillVfxObj.name);
                             break;
                     }
                 }
