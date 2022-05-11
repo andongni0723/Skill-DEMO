@@ -30,4 +30,12 @@ MonoBehaviour:
   - startTime: 0
     actionType: 1
     skillEffect: []
-    skillVfxObj: {fileID: 8145034337851827253, guid: f2dd7ea0e4cf8b940bd8471c8a6d1b31, type: 3}
+    skillVfxObj: {fileID: 5879623658334155033, guid: 55edc767801c3384ca237cb55b097a6b, type: 3}
+  - startTime: 0.5
+    actionType: 1
+    skillEffect: []
+    skillVfxObj: {fileID: 5879623658334155033, guid: 55edc767801c3384ca237cb55b097a6b, type: 3}
+  - startTime: 1
+    actionType: 1
+    skillEffect: []
+    skillVfxObj: {fileID: 5879623658334155033, guid: 55edc767801c3384ca237cb55b097a6b, type: 3}
