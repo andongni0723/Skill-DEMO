@@ -59,8 +59,7 @@ namespace SkillDemo.Skill
             cooldownText = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
             joystick = GetComponentInChildren<FloatingJoystick>();
             skillLoadingSlider = PlayerMove.Instance.gameObject.GetComponentInChildren<Slider>();
-            skillLoadingSlider.gameObject.SetActive(false);
-
+            
             skillActions = skillDatail.skillActions;
             skillImage.sprite = skillDatail.skillSprite;
             skillName.text = skillDatail.skillName;
@@ -72,6 +71,7 @@ namespace SkillDemo.Skill
             {
                 ColdDown();
 
+                
                 skillStatus = ChangeSkillStatus(skillStatus);
                 //print(skillStatus);
 
@@ -82,6 +82,7 @@ namespace SkillDemo.Skill
             skillShowUI = GameObject.FindGameObjectWithTag("SkillUI").transform.GetChild(skillDatail.skillNum - 1).gameObject;
             skillShowChild = skillShowUI.transform.GetChild(1).gameObject;
 
+            skillLoadingSlider.gameObject.SetActive(false);
             isSkillSettingDone = true;
 
         }
@@ -142,7 +143,10 @@ namespace SkillDemo.Skill
 
         private void SetExcuteSkill()
         {
+            StopCoroutine(ExecuteSkill());
             excuteSkillTimer = 0;
+            skillLoadingSlider.gameObject.SetActive(false);
+            skillLoadingSlider.value = 0;
 
             StartCoroutine(ExecuteSkill());
         }
@@ -153,7 +157,9 @@ namespace SkillDemo.Skill
         /// <returns></returns>
         private IEnumerator ExecuteSkill()
         {
-            // If the point skill doesn't have target enemy
+            float skillLoagingSliderSaveTime = 0;
+
+            // If the point skill show UI doesn't have target enemy
             if (skillDatail.skillType == SkillType.Point)
             {
                 PointUI pointUI = skillShowChild.GetComponent<PointUI>();
@@ -168,8 +174,16 @@ namespace SkillDemo.Skill
             // Excute Action in Skill Action 
             for (int index = 0; index < skillActions.Count; index++)
             {
-            StartExcute:
+                // If the 'script skill time' not equal the 'skill action time', the timer will add times and let script begin to here
+            StartExcute: 
+
                 print("Timer: " + excuteSkillTimer);
+                if(skillDatail.skillActions[index].isSkillLoadingSliderOpen)
+                {
+                    skillLoadingSlider.gameObject.SetActive(true);
+                    skillLoagingSliderSaveTime = excuteSkillTimer;
+                    skillLoadingSlider.value = skillLoagingSliderSaveTime / skillActions[index].startTime;
+                }
 
                 if (Mathf.Approximately(excuteSkillTimer, skillActions[index].startTime))
                 {
@@ -187,15 +201,17 @@ namespace SkillDemo.Skill
                             {
                                 case SkillType.Shoot:
                                     print("1");
-                                    GameObject skillObj = Instantiate(skillActions[index].skillVfxObj, PlayerMove.Instance.transform.position, skillShowUIRotation);
+                                    GameObject skillShootObj = Instantiate(skillActions[index].skillVfxObj, PlayerMove.Instance.transform.position, skillShowUIRotation);
 
-                                    skillObj.GetComponentInChildren<SpriteRenderer>().size = new Vector2(skillDatail.shootVar.shootWidth, 1);
-                                    skillObj.GetComponentInChildren<Bullet>().skillLenth = skillDatail.shootVar.shootHeight;
-                                    skillObj.GetComponentInChildren<Bullet>().damage = skillDatail.skillActions[index].skillDamage;
-                                    skillObj.GetComponentInChildren<BoxCollider2D>().size = new Vector2(skillDatail.shootVar.shootWidth, 1);
+                                    skillShootObj.GetComponentInChildren<SpriteRenderer>().size = new Vector2(skillDatail.shootVar.shootWidth, skillDatail.shootVar.shootObjHeight);
+                                    skillShootObj.GetComponentInChildren<Bullet>().skillLenth = skillDatail.shootVar.shootHeight;
+                                    skillShootObj.GetComponentInChildren<Bullet>().damage = skillDatail.skillActions[index].skillDamage;
+                                    skillShootObj.GetComponentInChildren<BoxCollider2D>().size = new Vector2(skillDatail.shootVar.shootWidth, skillDatail.shootVar.shootObjHeight);                               
                                     break;
 
                                 case SkillType.AOE:
+                                    //FIXME:bug
+                                    GameObject skillAoeObj = Instantiate(skillActions[index].skillVfxObj, skillShowChild.transform.position, Quaternion.identity);
                                     break;
                             }
 
@@ -203,17 +219,21 @@ namespace SkillDemo.Skill
                     }
 
                     excuteSkillTimer += excuteSkillTimerAddTime;
+                    
 
                     yield return new WaitForSeconds(excuteSkillTimerAddTime);
 
                 }
                 else // the element start time isn't now excute time
                 {
-                    excuteSkillTimer += excuteSkillTimerAddTime;
+                    excuteSkillTimer += excuteSkillTimerAddTime;     
+
                     yield return new WaitForSeconds(excuteSkillTimerAddTime);
                     print("2");
                     goto StartExcute;
                 }
+
+                skillLoadingSlider.gameObject.SetActive(false);
             }
 
             yield return null;

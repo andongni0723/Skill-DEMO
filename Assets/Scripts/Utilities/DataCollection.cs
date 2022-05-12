@@ -6,6 +6,7 @@ public class Shoot
 {
     public float shootHeight;
     public float shootWidth;
+    public float shootObjHeight;
 }
 
 [System.Serializable]
@@ -41,12 +42,12 @@ public class SkillActionDetails
     [Header("Effect Setting")]
     [Space(10)]
     public List<EffectDatails> skillEffect = new List<EffectDatails>();
-    
+
 
     [Header("New Object Setting")]
     [Space(10)]
     public GameObject skillVfxObj;
     public float skillDamage;
-
+    public bool isSkillLoadingSliderOpen = false;
 
 }

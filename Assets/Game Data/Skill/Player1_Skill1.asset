@@ -15,20 +15,70 @@ MonoBehaviour:
   skillID: 1001
   skillName: "\u9B54\u5F48"
   skillSprite: {fileID: 21300000, guid: 1103e1180784ad14b8d402f94fc6bb70, type: 3}
-  skillCooldown: 1
+  skillCooldown: 2.5
   skillNum: 1
   skillType: 0
   shootVar:
     shootHeight: 5
-    shootWidth: 5
+    shootWidth: 0.8
+    shootObjHeight: 2
   aoeVar:
     aoeSkillMaxRadius: 0
     aoeRadius: 0
   pointVar:
     pointSkillMaxRadius: 0
   skillActions:
-  - startTime: 2
+  - startTime: 0
     actionType: 1
     skillEffect: []
     skillVfxObj: {fileID: 5879623658334155033, guid: 55edc767801c3384ca237cb55b097a6b, type: 3}
-    skillDamage: 50
+    skillDamage: 10
+    isSkillLoadingSliderOpen: 0
+  - startTime: 0.2
+    actionType: 1
+    skillEffect: []
+    skillVfxObj: {fileID: 5879623658334155033, guid: 55edc767801c3384ca237cb55b097a6b, type: 3}
+    skillDamage: 10
+    isSkillLoadingSliderOpen: 0
+  - startTime: 0.4
+    actionType: 1
+    skillEffect: []
+    skillVfxObj: {fileID: 5879623658334155033, guid: 55edc767801c3384ca237cb55b097a6b, type: 3}
+    skillDamage: 10
+    isSkillLoadingSliderOpen: 0
+  - startTime: 0.6
+    actionType: 1
+    skillEffect: []
+    skillVfxObj: {fileID: 5879623658334155033, guid: 55edc767801c3384ca237cb55b097a6b, type: 3}
+    skillDamage: 10
+    isSkillLoadingSliderOpen: 0
+  - startTime: 0.8
+    actionType: 1
+    skillEffect: []
+    skillVfxObj: {fileID: 5879623658334155033, guid: 55edc767801c3384ca237cb55b097a6b, type: 3}
+    skillDamage: 10
+    isSkillLoadingSliderOpen: 0
+  - startTime: 1.2
+    actionType: 1
+    skillEffect: []
+    skillVfxObj: {fileID: 5879623658334155033, guid: 55edc767801c3384ca237cb55b097a6b, type: 3}
+    skillDamage: 10
+    isSkillLoadingSliderOpen: 1
+  - startTime: 1.4
+    actionType: 1
+    skillEffect: []
+    skillVfxObj: {fileID: 5879623658334155033, guid: 55edc767801c3384ca237cb55b097a6b, type: 3}
+    skillDamage: 10
+    isSkillLoadingSliderOpen: 0
+  - startTime: 1.6
+    actionType: 1
+    skillEffect: []
+    skillVfxObj: {fileID: 5879623658334155033, guid: 55edc767801c3384ca237cb55b097a6b, type: 3}
+    skillDamage: 10
+    isSkillLoadingSliderOpen: 0
+  - startTime: 1.8
+    actionType: 1
+    skillEffect: []
+    skillVfxObj: {fileID: 5879623658334155033, guid: 55edc767801c3384ca237cb55b097a6b, type: 3}
+    skillDamage: 10
+    isSkillLoadingSliderOpen: 0

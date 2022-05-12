@@ -21,6 +21,7 @@ MonoBehaviour:
   shootVar:
     shootHeight: 0
     shootWidth: 0
+    shootObjHeight: 0
   aoeVar:
     aoeSkillMaxRadius: 5
     aoeRadius: 2
@@ -30,5 +31,6 @@ MonoBehaviour:
   - startTime: 0
     actionType: 1
     skillEffect: []
-    skillVfxObj: {fileID: 0}
-    skillDamage: 0
+    skillVfxObj: {fileID: 1891178314701858681, guid: 875a8e1ca73a8574e80b7854aef9e0d3, type: 3}
+    skillDamage: 10
+    isSkillLoadingSliderOpen: 0
