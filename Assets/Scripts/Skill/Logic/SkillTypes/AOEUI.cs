@@ -41,8 +41,18 @@ public class AOEUI : MonoBehaviour
     /// </summary>
     private void Look()
     {
-        circle.SetActive(joystick.transform.GetChild(0).gameObject.activeSelf);
-        aoe.SetActive(joystick.transform.GetChild(0).gameObject.activeSelf);
+        if (joystick.transform.GetChild(0).gameObject.activeSelf == false && aoe.activeSelf)
+        {
+            Vector3 nowPos = aoe.transform.position;
+            EventHandler.CallSaveSkillShowUIData(Quaternion.identity, nowPos);
+            aoe.SetActive(false);
+            circle.SetActive(false);
+        }
+        else
+        {
+            aoe.SetActive(joystick.transform.GetChild(0).gameObject.activeSelf);
+            circle.SetActive(joystick.transform.GetChild(0).gameObject.activeSelf);
+        }
 
         Vector2 UI = new Vector2(joystick.Direction.x * skillMaxRadius, joystick.Direction.y * skillMaxRadius);
         aoe.transform.localPosition = UI;

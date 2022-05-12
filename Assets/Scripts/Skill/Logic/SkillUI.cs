@@ -36,6 +36,7 @@ namespace SkillDemo.Skill
         float excuteSkillTimerAddTime = 0.1f;
 
         Quaternion skillShowUIRotation;
+        Vector3 skillShowUIPosition;
 
 
 
@@ -87,9 +88,11 @@ namespace SkillDemo.Skill
 
         }
 
-        private void OnSaveSkillShowUIData()
+        private void OnSaveSkillShowUIData(Quaternion rotation, Vector3 pos)
         {
-            skillShowUIRotation = skillShowUI.transform.rotation;
+            skillShowUIRotation = rotation;
+            skillShowUIPosition = pos;
+            
         }
 
         private void ColdDown()
@@ -177,7 +180,7 @@ namespace SkillDemo.Skill
                 // If the 'script skill time' not equal the 'skill action time', the timer will add times and let script begin to here
             StartExcute: 
 
-                print("Timer: " + excuteSkillTimer);
+                //print("Timer: " + excuteSkillTimer);
                 if(skillDatail.skillActions[index].isSkillLoadingSliderOpen)
                 {
                     skillLoadingSlider.gameObject.SetActive(true);
@@ -200,7 +203,7 @@ namespace SkillDemo.Skill
                             switch (skillDatail.skillType)
                             {
                                 case SkillType.Shoot:
-                                    print("1");
+                                    //print("1");
                                     GameObject skillShootObj = Instantiate(skillActions[index].skillVfxObj, PlayerMove.Instance.transform.position, skillShowUIRotation);
 
                                     skillShootObj.GetComponentInChildren<SpriteRenderer>().size = new Vector2(skillDatail.shootVar.shootWidth, skillDatail.shootVar.shootObjHeight);
@@ -210,8 +213,14 @@ namespace SkillDemo.Skill
                                     break;
 
                                 case SkillType.AOE:
-                                    //FIXME:bug
-                                    GameObject skillAoeObj = Instantiate(skillActions[index].skillVfxObj, skillShowChild.transform.position, Quaternion.identity);
+                                    GameObject skillAoeObj = Instantiate(skillActions[index].skillVfxObj, skillShowUIPosition, Quaternion.identity);
+                                    
+                                    skillAoeObj.GetComponentInChildren<SpriteRenderer>().size = new Vector2(skillDatail.aoeVar.aoeRadius, skillDatail.aoeVar.aoeRadius);
+                                    skillAoeObj.GetComponentInChildren<AoeBomb>().damage = skillDatail.skillActions[index].skillDamage;
+                                    skillAoeObj.GetComponentInChildren<CircleCollider2D>().radius = skillDatail.aoeVar.aoeRadius / 2;
+
+                                    break;
+                                case SkillType.Point:
                                     break;
                             }
 
@@ -229,7 +238,7 @@ namespace SkillDemo.Skill
                     excuteSkillTimer += excuteSkillTimerAddTime;     
 
                     yield return new WaitForSeconds(excuteSkillTimerAddTime);
-                    print("2");
+                    //print("2");
                     goto StartExcute;
                 }
 

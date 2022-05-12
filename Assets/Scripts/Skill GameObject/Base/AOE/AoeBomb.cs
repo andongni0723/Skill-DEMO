@@ -7,7 +7,10 @@ public class AoeBomb : MonoBehaviour
 {
     Animator anim;
     [SerializeField]
-    float damage;
+
+    [HideInInspector]
+    public float damage;
+    
     [SerializeField]
     float waitAnimTime;
 

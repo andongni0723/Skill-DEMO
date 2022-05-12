@@ -49,7 +49,8 @@ public class ShootUI : MonoBehaviour
     {
         if (joystick.transform.GetChild(0).gameObject.activeSelf == false && shoot.activeSelf)
         {
-            EventHandler.CallSaveSkillShowUIData();
+            Quaternion nowRotation = shoot.transform.rotation;
+            EventHandler.CallSaveSkillShowUIData(nowRotation, Vector3.zero);
             shoot.SetActive(false);
             circle.SetActive(false);
         }

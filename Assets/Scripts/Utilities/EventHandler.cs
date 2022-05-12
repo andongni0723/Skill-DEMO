@@ -1,4 +1,7 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public static class EventHandler
 {
@@ -14,9 +17,9 @@ public static class EventHandler
         SetInitSkillObjDone?.Invoke();
     }
 
-    public static event Action SaveSkillShowUIData;
-    public static void CallSaveSkillShowUIData()
+    public static event Action<Quaternion, Vector3> SaveSkillShowUIData;
+    public static void CallSaveSkillShowUIData(Quaternion rotation, Vector3 pos)
     {
-        SaveSkillShowUIData?.Invoke();
+        SaveSkillShowUIData?.Invoke(rotation, pos);
     }
 }

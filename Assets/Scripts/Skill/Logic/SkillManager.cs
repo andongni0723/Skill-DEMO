@@ -34,14 +34,13 @@ namespace SkillDemo.Skill
             {
                 switch (item.skillDatail.skillType)
                 {
-                    //WORKFLOW: Add the all skill type after all player skill UI is done
 
                     case SkillType.Shoot:
                         GameObject shoot = (GameObject)Instantiate(PrefabManager.Instance.skillShoot, GameObject.FindGameObjectWithTag("Player").transform.position, Quaternion.identity, playerSkillUI.transform);
                         ShootUI shootUI = shoot.GetComponent<ShootUI>();
 
                         shootUI.height = item.skillDatail.shootVar.shootHeight;
-                        shootUI.width= item.skillDatail.shootVar.shootWidth;
+                        shootUI.width = item.skillDatail.shootVar.shootWidth;
                         shootUI.skillNum = skills.IndexOf(item) + 1;
                         shootUI.isSetDone = true;
                         break;
@@ -60,9 +59,9 @@ namespace SkillDemo.Skill
                         GameObject point = (GameObject)Instantiate(PrefabManager.Instance.skillPoint, GameObject.FindGameObjectWithTag("Player").transform.position, Quaternion.identity, playerSkillUI.transform);
                         PointUI pointUI = point.GetComponent<PointUI>();
 
-                        pointUI.skillMaxRadius = item.skillDatail.pointVar.pointSkillMaxRadius; 
+                        pointUI.skillMaxRadius = item.skillDatail.pointVar.pointSkillMaxRadius;
                         pointUI.skillNum = skills.IndexOf(item) + 1;
-                        pointUI.isSetDone = true;             
+                        pointUI.isSetDone = true;
                         break;
                 }
             }

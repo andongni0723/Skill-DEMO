@@ -32,53 +32,53 @@ MonoBehaviour:
     actionType: 1
     skillEffect: []
     skillVfxObj: {fileID: 5879623658334155033, guid: 55edc767801c3384ca237cb55b097a6b, type: 3}
-    skillDamage: 10
+    skillDamage: 4
     isSkillLoadingSliderOpen: 0
   - startTime: 0.2
     actionType: 1
     skillEffect: []
     skillVfxObj: {fileID: 5879623658334155033, guid: 55edc767801c3384ca237cb55b097a6b, type: 3}
-    skillDamage: 10
+    skillDamage: 4
     isSkillLoadingSliderOpen: 0
   - startTime: 0.4
     actionType: 1
     skillEffect: []
     skillVfxObj: {fileID: 5879623658334155033, guid: 55edc767801c3384ca237cb55b097a6b, type: 3}
-    skillDamage: 10
+    skillDamage: 4
     isSkillLoadingSliderOpen: 0
   - startTime: 0.6
     actionType: 1
     skillEffect: []
     skillVfxObj: {fileID: 5879623658334155033, guid: 55edc767801c3384ca237cb55b097a6b, type: 3}
-    skillDamage: 10
+    skillDamage: 4
     isSkillLoadingSliderOpen: 0
   - startTime: 0.8
     actionType: 1
     skillEffect: []
     skillVfxObj: {fileID: 5879623658334155033, guid: 55edc767801c3384ca237cb55b097a6b, type: 3}
-    skillDamage: 10
+    skillDamage: 4
     isSkillLoadingSliderOpen: 0
   - startTime: 1.2
     actionType: 1
     skillEffect: []
     skillVfxObj: {fileID: 5879623658334155033, guid: 55edc767801c3384ca237cb55b097a6b, type: 3}
-    skillDamage: 10
+    skillDamage: 104
     isSkillLoadingSliderOpen: 1
   - startTime: 1.4
     actionType: 1
     skillEffect: []
     skillVfxObj: {fileID: 5879623658334155033, guid: 55edc767801c3384ca237cb55b097a6b, type: 3}
-    skillDamage: 10
+    skillDamage: 4
     isSkillLoadingSliderOpen: 0
   - startTime: 1.6
     actionType: 1
     skillEffect: []
     skillVfxObj: {fileID: 5879623658334155033, guid: 55edc767801c3384ca237cb55b097a6b, type: 3}
-    skillDamage: 10
+    skillDamage: 4
     isSkillLoadingSliderOpen: 0
   - startTime: 1.8
     actionType: 1
     skillEffect: []
     skillVfxObj: {fileID: 5879623658334155033, guid: 55edc767801c3384ca237cb55b097a6b, type: 3}
-    skillDamage: 10
+    skillDamage: 4
     isSkillLoadingSliderOpen: 0

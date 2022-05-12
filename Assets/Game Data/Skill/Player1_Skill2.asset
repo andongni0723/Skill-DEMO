@@ -32,5 +32,5 @@ MonoBehaviour:
     actionType: 1
     skillEffect: []
     skillVfxObj: {fileID: 1891178314701858681, guid: 875a8e1ca73a8574e80b7854aef9e0d3, type: 3}
-    skillDamage: 10
+    skillDamage: 30
     isSkillLoadingSliderOpen: 0
