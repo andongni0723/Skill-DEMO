@@ -26,6 +26,7 @@ public class EffectDatails
 {
     public Effect effect;
     public float effectDuration;
+    public EffectTarget effectTarget;
 }
 
 [System.Serializable]
@@ -37,7 +38,15 @@ public class SkillActionDetails
     public ActionType actionType;
 
 
-    [Space(10)] public List<EffectDatails> skillEffect = new List<EffectDatails>();
-    [Space(10)] public GameObject skillVfxObj;
+    [Header("Effect Setting")]
+    [Space(10)]
+    public List<EffectDatails> skillEffect = new List<EffectDatails>();
+    
+
+    [Header("New Object Setting")]
+    [Space(10)]
+    public GameObject skillVfxObj;
+    public float skillDamage;
+
 
 }

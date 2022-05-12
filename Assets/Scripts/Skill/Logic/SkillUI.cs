@@ -17,6 +17,8 @@ namespace SkillDemo.Skill
         public GameObject skillShowChild;
         public GameObject skillShowUI;
 
+        public Slider skillLoadingSlider;
+
 
 
         private bool isCooldown;
@@ -30,8 +32,8 @@ namespace SkillDemo.Skill
 
         //Excute Skill Var
         List<SkillActionDetails> skillActions;
-        int index = 0;
         float excuteSkillTimer = 0;
+        float excuteSkillTimerAddTime = 0.1f;
 
         Quaternion skillShowUIRotation;
 
@@ -50,14 +52,16 @@ namespace SkillDemo.Skill
         }
 
 
-        private void Awake()
+        private new void Awake()
         {
             skillImage = GetComponentInChildren<Image>();
             skillName = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
             cooldownText = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
             joystick = GetComponentInChildren<FloatingJoystick>();
-            skillActions = skillDatail.skillActions;
+            skillLoadingSlider = PlayerMove.Instance.gameObject.GetComponentInChildren<Slider>();
+            skillLoadingSlider.gameObject.SetActive(false);
 
+            skillActions = skillDatail.skillActions;
             skillImage.sprite = skillDatail.skillSprite;
             skillName.text = skillDatail.skillName;
         }
@@ -138,8 +142,7 @@ namespace SkillDemo.Skill
 
         private void SetExcuteSkill()
         {
-            index = 0;
-            timer = 0;
+            excuteSkillTimer = 0;
 
             StartCoroutine(ExecuteSkill());
         }
@@ -163,12 +166,13 @@ namespace SkillDemo.Skill
             }
 
             // Excute Action in Skill Action 
-            for (int index = 0; index < skillActions.Count; index++) 
+            for (int index = 0; index < skillActions.Count; index++)
             {
-                if (excuteSkillTimer == skillActions[index].startTime)
+            StartExcute:
+                print("Timer: " + excuteSkillTimer);
+
+                if (Mathf.Approximately(excuteSkillTimer, skillActions[index].startTime))
                 {
-                    print(excuteSkillTimer);
-                    //FIXME: can't shoot at second time
 
                     switch (skillActions[index].actionType)
                     {
@@ -181,11 +185,14 @@ namespace SkillDemo.Skill
 
                             switch (skillDatail.skillType)
                             {
-                                case SkillType.Shoot:                                  
+                                case SkillType.Shoot:
+                                    print("1");
                                     GameObject skillObj = Instantiate(skillActions[index].skillVfxObj, PlayerMove.Instance.transform.position, skillShowUIRotation);
-                                    
+
                                     skillObj.GetComponentInChildren<SpriteRenderer>().size = new Vector2(skillDatail.shootVar.shootWidth, 1);
                                     skillObj.GetComponentInChildren<Bullet>().skillLenth = skillDatail.shootVar.shootHeight;
+                                    skillObj.GetComponentInChildren<Bullet>().damage = skillDatail.skillActions[index].skillDamage;
+                                    skillObj.GetComponentInChildren<BoxCollider2D>().size = new Vector2(skillDatail.shootVar.shootWidth, 1);
                                     break;
 
                                 case SkillType.AOE:
@@ -194,10 +201,19 @@ namespace SkillDemo.Skill
 
                             break;
                     }
-                }
 
-                excuteSkillTimer += 0.25f;
-                //yield return new WaitForSeconds(0.25f);
+                    excuteSkillTimer += excuteSkillTimerAddTime;
+
+                    yield return new WaitForSeconds(excuteSkillTimerAddTime);
+
+                }
+                else // the element start time isn't now excute time
+                {
+                    excuteSkillTimer += excuteSkillTimerAddTime;
+                    yield return new WaitForSeconds(excuteSkillTimerAddTime);
+                    print("2");
+                    goto StartExcute;
+                }
             }
 
             yield return null;

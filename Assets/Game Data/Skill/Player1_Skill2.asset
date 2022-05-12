@@ -26,6 +26,9 @@ MonoBehaviour:
     aoeRadius: 2
   pointVar:
     pointSkillMaxRadius: 0
-  OnSkill:
-    m_PersistentCalls:
-      m_Calls: []
+  skillActions:
+  - startTime: 0
+    actionType: 1
+    skillEffect: []
+    skillVfxObj: {fileID: 0}
+    skillDamage: 0

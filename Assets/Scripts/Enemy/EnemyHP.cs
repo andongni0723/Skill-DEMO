@@ -18,9 +18,7 @@ namespace SkillDemo.Enemy
 
         [SerializeField]
         private float hpShowAnimTime = 2;
-        private float AnimTimer = 0;
         private float playerAttackDamage;
-        private bool callSetAndPlayDamageAnim = false;
 
         private void Awake()
         {
@@ -47,20 +45,9 @@ namespace SkillDemo.Enemy
         {
             playerAttackDamage = damage;
             hp -= playerAttackDamage;
-            callSetAndPlayDamageAnim = true;
 
             StartCoroutine(DamageAnim(damage));
         }
-
-        // private void SetAndPlayDamageAnim(float damage)
-        // {
-        //     AnimTimer = 0;
-        //     damageText.gameObject.SetActive(true);
-        //     damageText.text = "-" + damage.ToString();
-        //     damageText.alpha = 255;
-        //     StartCoroutine(DamageAnim(damage));
-
-        // }
 
         private IEnumerator DamageAnim(float damage)
         {

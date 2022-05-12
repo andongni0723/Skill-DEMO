@@ -19,23 +19,16 @@ MonoBehaviour:
   skillNum: 1
   skillType: 0
   shootVar:
-    shootHeight: 6
-    shootWidth: 1.5
+    shootHeight: 5
+    shootWidth: 5
   aoeVar:
     aoeSkillMaxRadius: 0
     aoeRadius: 0
   pointVar:
     pointSkillMaxRadius: 0
   skillActions:
-  - startTime: 0
+  - startTime: 2
     actionType: 1
     skillEffect: []
     skillVfxObj: {fileID: 5879623658334155033, guid: 55edc767801c3384ca237cb55b097a6b, type: 3}
-  - startTime: 0.5
-    actionType: 1
-    skillEffect: []
-    skillVfxObj: {fileID: 5879623658334155033, guid: 55edc767801c3384ca237cb55b097a6b, type: 3}
-  - startTime: 1
-    actionType: 1
-    skillEffect: []
-    skillVfxObj: {fileID: 5879623658334155033, guid: 55edc767801c3384ca237cb55b097a6b, type: 3}
+    skillDamage: 50
