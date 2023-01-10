@@ -14,6 +14,8 @@ public class AoeBomb : MonoBehaviour
     [SerializeField]
     float waitAnimTime;
 
+    public EffectDatails effect;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();

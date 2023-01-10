@@ -21,11 +21,10 @@ MonoBehaviour:
   shootVar:
     shootHeight: 0
     shootWidth: 0
+    shootObjHeight: 0
   aoeVar:
-    aoeSkillMaxRadius: 2
-    aoeRadius: 3
+    aoeSkillMaxRadius: 0
+    aoeRadius: 0
   pointVar:
-    pointSkillMaxRadius: 4
-  OnSkill:
-    m_PersistentCalls:
-      m_Calls: []
+    pointSkillMaxRadius: 7
+  skillActions: []

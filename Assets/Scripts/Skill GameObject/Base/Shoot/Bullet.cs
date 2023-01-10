@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
     public GameObject originPos;
 
     public float skillLenth = 0;
+    public EffectDatails effect;
 
     /// <summary>
     /// Basic bullet move

@@ -11,6 +11,8 @@ TagManager:
   - SkillUI
   - Enemy
   - PlayerAttackObj
+  - Effects
+  - Effect icon
   layers:
   - Default
   - TransparentFX

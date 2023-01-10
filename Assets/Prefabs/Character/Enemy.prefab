@@ -351,8 +351,8 @@ GameObject:
   - component: {fileID: 3731710267424134942}
   - component: {fileID: 5074577248714589993}
   - component: {fileID: 2518338495187878290}
-  - component: {fileID: 7474744253708608346}
   - component: {fileID: 579545668967871541}
+  - component: {fileID: 7474744253708608346}
   - component: {fileID: 449743720}
   m_Layer: 0
   m_Name: Enemy
@@ -476,18 +476,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7474744253708608346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3731710267424134943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b20aa0f8dbf8f8a42b643c22f03e180e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &579545668967871541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,6 +491,19 @@ MonoBehaviour:
   slider: {fileID: 2158194579009706908}
   damageText: {fileID: 5751368863797107754}
   hp: 100
+  hpShowAnimTime: 2
+--- !u!114 &7474744253708608346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3731710267424134943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b20aa0f8dbf8f8a42b643c22f03e180e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &449743720
 Animator:
   serializedVersion: 4

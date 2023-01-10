@@ -15,7 +15,7 @@ MonoBehaviour:
   skillID: 1002
   skillName: "\u80FD\u91CF\u70B8\u5F48"
   skillSprite: {fileID: 21300000, guid: cd01adada99b07d40a993f35146da654, type: 3}
-  skillCooldown: 3
+  skillCooldown: 5
   skillNum: 2
   skillType: 1
   shootVar:
@@ -32,5 +32,14 @@ MonoBehaviour:
     actionType: 1
     skillEffect: []
     skillVfxObj: {fileID: 1891178314701858681, guid: 875a8e1ca73a8574e80b7854aef9e0d3, type: 3}
-    skillDamage: 30
+    skillDamage: 14
+    isSkillLoadingSliderOpen: 0
+  - startTime: 0
+    actionType: 0
+    skillEffect:
+    - effect: 1
+      effectDuration: 3
+      effectTarget: 1
+    skillVfxObj: {fileID: 1891178314701858681, guid: 875a8e1ca73a8574e80b7854aef9e0d3, type: 3}
+    skillDamage: 14
     isSkillLoadingSliderOpen: 0

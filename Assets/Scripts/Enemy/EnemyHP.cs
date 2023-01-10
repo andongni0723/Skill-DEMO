@@ -35,7 +35,7 @@ namespace SkillDemo.Enemy
         {
             if (hp <= 0)
             {
-                Destroy(gameObject);
+                Destroy(gameObject.transform.parent.gameObject);
             }
 
             slider.value = hp / 100;

@@ -6,7 +6,7 @@ public class PlayerMove : Singleton<PlayerMove>
 {
     private Rigidbody2D rb;
 
-    [SerializeField] private float speed;
+    public float speed;
 
     private float movementX;
     private float movementY;
